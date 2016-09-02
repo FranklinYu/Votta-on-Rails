@@ -22,3 +22,19 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+== deploy on server
+
+First, make sure that you have Bundler installed:
+
+  $ gem install bundler
+
+Then install the bundle with Bundler
+
+  $ bundle install --deployment --without development test doc
+
+Now you can launch it with Puma:
+
+  $ bundle exec puma -C config/puma.rb
+
+Note that the +-C+ flag is aliased to +--config+.
