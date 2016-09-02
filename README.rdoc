@@ -38,3 +38,18 @@ Now you can launch it with Puma:
   $ bundle exec puma -C config/puma.rb
 
 Note that the +-C+ flag is aliased to +--config+.
+
+== test
+
+First, make sure that you have Bundler installed:
+
+  $ gem install bundler
+
+Then install the bundle with Bundler:
+
+  $ bundle install --without development production doc
+
+You need to re-run with the +--deployment+ flag if this fails (which means you
+are testing on an online container). Now test with RSpec:
+
+  $ bundle exec rspec

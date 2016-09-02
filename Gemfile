@@ -28,6 +28,10 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
+group :test do
+  gem 'rspec-rails', '~> 3.5'
+end
+
 group :production do
   # Use Puma as the app server
   gem 'puma', '~> 3.0'
