@@ -25,6 +25,11 @@ Things you may want to cover:
 
 == deploy on server
 
+Prerequisite:
+
+* Ruby (version shown in the file +.ruby-version+)
+* PostgreSQL[https://www.postgresql.org/download/]
+
 First, make sure that you have Bundler installed:
 
   $ gem install bundler
@@ -40,6 +45,10 @@ Now you can launch it with Puma:
 Note that the +-C+ flag is aliased to +--config+.
 
 == test
+
+Prerequisite:
+
+* Ruby (version shown in the file +.ruby-version+)
 
 First, make sure that you have Bundler installed:
 
