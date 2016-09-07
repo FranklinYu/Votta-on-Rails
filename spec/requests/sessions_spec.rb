@@ -1,0 +1,38 @@
+require 'rails_helper'
+
+shared_examples 'resource requiring authorization' do
+  let(:session) { create(:session) }
+
+  it 'is inaccessible without token' do
+    subject.call(params: {format: :json})
+    expect(response).to be_unauthorized
+  end
+
+  it 'is inaccessible with invalid token' do
+    invalid_session_id = Session.count + 2
+    subject.call(params: {format: :json}, headers: {authorization: "Token #{invalid_session_id}"})
+    expect(response).to be_unauthorized
+  end
+
+  it 'is accessible with valid token' do
+    subject.call(params: {format: :json}, headers: {authorization: "Token #{session.id}"})
+    expect(response).to be_ok
+  end
+end
+
+describe 'Sessions resource' do
+  describe '#index' do
+    subject { Proc.new { |options| get sessions_path, options } }
+    it_behaves_like 'resource requiring authorization'
+  end
+
+  describe '#update' do
+    subject { Proc.new { |options| patch session_path(session), options } }
+    it_behaves_like 'resource requiring authorization'
+  end
+
+  describe '#destroy' do
+    subject { Proc.new { |options| delete session_path(session), options } }
+    it_behaves_like 'resource requiring authorization'
+  end
+end
