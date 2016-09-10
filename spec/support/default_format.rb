@@ -12,11 +12,11 @@ module DefaultFormat
       super(path, **kwarg)
     end
     %w(get post patch put delete).each do |method|
-      define_method(method, lambda)
+      define_method method, lambda
     end
   end
 end
 
 RSpec.configure do |config|
-  config.include DefaultFormat, type: :request
+  config.include(DefaultFormat, type: :request)
 end
