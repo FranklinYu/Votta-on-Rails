@@ -1,11 +1,11 @@
 FactoryGirl.define do
   factory :user do
-    email Faker::Internet.email
-    password Faker::Internet.password
+    email { Faker::Internet.email }
+    password { Faker::Internet.password }
   end
 
   factory :session do
     user
-    comment Faker::Lorem.sentence(3)
+    comment { Faker::Lorem.sentence(3) }
   end
 end
