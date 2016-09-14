@@ -23,6 +23,31 @@ shared_examples 'resource requiring authorization' do
 end
 
 describe 'Sessions resource' do
+  describe '#create' do
+    let(:user) { create(:user, password: 'correct password') }
+
+    it 'fails with email not registered' do
+      post sessions_path, params: {email: 'not-registered@example.com'}
+      expect(response).to be_not_found
+      expect(response.body).to include('email', 'not-registered@example.com')
+    end
+
+    it 'fails with wrong password' do
+      post sessions_path, params: {email: user.email, password: 'wrong password'}
+      expect(response).to be_unprocessable
+      expect(response.body).to include('password')
+    end
+
+    it 'returns usable token' do
+      post sessions_path, params: {email: user.email, password: 'correct password'}
+      expect(response).to be_ok
+      expect(response.body).to include('token')
+      token = JSON.parse(response.body)['token']
+      get sessions_path, headers: {authorization: "Token #{token}"}
+      expect(response).to be_ok
+    end
+  end
+
   describe '#index' do
     subject { Proc.new { |*options| get sessions_path, *options} }
     it_behaves_like 'resource requiring authorization'
