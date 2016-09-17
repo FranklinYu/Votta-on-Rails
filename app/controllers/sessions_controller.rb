@@ -1,8 +1,33 @@
 # frozen_string_literal: true
 
+# @restful_api 1.0
 class SessionsController < ApplicationController
   before_action :authenticate, except: [:create]
 
+  # @url /sessions
+  # @action POST
+  #
+  # Log in as a registered user.
+  #
+  # @required [String] email
+  # @required [String] password Plaintext password
+  #
+  # @response a token
+  #
+  # @example_request
+  #
+  #   WebForm:
+  #
+  #       email=registered_user@example.com
+  #       password=p1aint3xt-pa55w0rd
+  #
+  # @example_response
+  #
+  #   JSON:
+  #
+  #       {
+  #         "token": "a4d3sx.9erwcsw-tog562"
+  #       }
   def create
     user = User.find_by_email(params[:email])
     if user.nil?

@@ -149,6 +149,9 @@ GEM
     websocket-driver (0.6.4)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
+    yard (0.8.7.6)
+    yard-restful (1.2.3)
+      yard (~> 0.8.3)
 
 PLATFORMS
   ruby
@@ -170,6 +173,8 @@ DEPENDENCIES
   spring-watcher-listen (~> 2.0.0)
   sqlite3
   tzinfo-data
+  yard
+  yard-restful
 
 BUNDLED WITH
    1.12.5
