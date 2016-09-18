@@ -1,5 +1,6 @@
 --title 'Votta API reference'
 --plugin restful
---readme API.rdoc
+--readme API.markdown
+--markup markdown
 app/controllers/**/*.rb
 app/models/**/*.rb

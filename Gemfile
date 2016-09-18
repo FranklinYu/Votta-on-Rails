@@ -11,6 +11,7 @@ gem 'bcrypt', '~> 3.1.7'
 group :doc do
   gem 'yard'
   gem 'yard-restful'
+  gem 'redcarpet'
 end
 
 # Use Capistrano for deployment

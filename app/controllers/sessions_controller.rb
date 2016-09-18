@@ -15,19 +15,17 @@ class SessionsController < ApplicationController
   # @response a token
   #
   # @example_request
-  #
-  #   WebForm:
-  #
-  #       email=registered_user@example.com
-  #       password=p1aint3xt-pa55w0rd
+  #   ```form
+  #   email=registered_user@example.com
+  #   password=p1aint3xt-pa55w0rd
+  #   ```
   #
   # @example_response
-  #
-  #   JSON:
-  #
-  #       {
-  #         "token": "a4d3sx.9erwcsw-tog562"
-  #       }
+  #   ```json
+  #   {
+  #     "token": "abc"
+  #   }
+  #   ```
   def create
     user = User.find_by_email(params[:email])
     if user.nil?
