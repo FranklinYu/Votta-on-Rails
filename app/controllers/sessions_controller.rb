@@ -5,6 +5,28 @@ class SessionsController < ApplicationController
   before_action :authenticate, except: [:create]
 
   # @url /sessions
+  # @action GET
+  #
+  # List all the sessions for the current user.
+  #
+  # @response [Array<Session>]
+  #
+  # @example_request (with authentication header)
+  #
+  # @example_response
+  #   ```json
+  #   {
+  #     "sessions": [
+  #       {"comment": "my Mac"},
+  #       {"comment": "my iPhone"}
+  #     ]
+  #   }
+  #   ```
+  def index
+    @sessions = @session.user.sessions
+  end
+
+  # @url /sessions
   # @action POST
   #
   # Log in as a registered user.
@@ -41,7 +63,6 @@ class SessionsController < ApplicationController
     end
   end
 
-  def index; end
   def update; end
   def destroy; end
 end

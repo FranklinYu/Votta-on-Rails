@@ -36,4 +36,33 @@ describe 'Sessions resource' do
       expect(response).to be_ok
     end
   end
+
+  context 'when user is logged in' do
+    let(:session) { create(:session) }
+
+    describe '#index' do
+      it 'list all the sessions for current user' do
+        another_session = create(:session, user: session.user)
+        get sessions_path, headers: {authorization: "Token #{session.id}"}
+        expect(response).to be_ok
+        expect(response.parsed_body.with_indifferent_access).to include(
+          sessions: a_collection_including(
+            {comment: session.comment},
+            {comment: another_session.comment}
+          )
+        )
+      end
+
+      it 'does not leak sessions for other users' do
+        another_session = create(:session)
+        get sessions_path, headers: {authorization: "Token #{session.id}"}
+        expect(response).to be_ok
+        expect(response.parsed_body.with_indifferent_access).not_to include(
+          sessions: a_collection_including(
+            {comment: another_session.comment}
+          )
+        )
+      end
+    end
+  end
 end
