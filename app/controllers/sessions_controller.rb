@@ -23,7 +23,7 @@ class SessionsController < ApplicationController
   #   }
   #   ```
   def index
-    @sessions = @session.user.sessions
+    @sessions = @current_session.user.sessions
   end
 
   # @url /sessions

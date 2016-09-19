@@ -7,7 +7,7 @@ class ApplicationController < ActionController::API
     authenticate_or_request_with_http_token do |token|
       begin
         # TODO: use stronger token than `session_id`
-        @session = Session.find(token)
+        @current_session = Session.find(token)
       rescue ActiveRecord::RecordNotFound
         false
       end
