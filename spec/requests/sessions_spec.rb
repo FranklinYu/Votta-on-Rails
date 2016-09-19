@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
+require 'support/logged_in_user'
 
 describe 'Sessions resource' do
   describe '#create' do
@@ -38,16 +39,16 @@ describe 'Sessions resource' do
   end
 
   context 'when user is logged in' do
-    let(:session) { create(:session) }
+    let(:current_session) { create(:session) }
 
     describe '#index' do
       it 'list all the sessions for current user' do
-        another_session = create(:session, user: session.user)
-        get sessions_path, headers: {authorization: "Token #{session.id}"}
+        another_session = create(:session, user: current_session.user)
+        get sessions_path
         expect(response).to be_ok
         expect(response.parsed_body.with_indifferent_access).to include(
           sessions: a_collection_including(
-            {comment: session.comment},
+            {comment: current_session.comment},
             {comment: another_session.comment}
           )
         )
@@ -55,7 +56,7 @@ describe 'Sessions resource' do
 
       it 'does not leak sessions for other users' do
         another_session = create(:session)
-        get sessions_path, headers: {authorization: "Token #{session.id}"}
+        get sessions_path
         expect(response).to be_ok
         expect(response.parsed_body.with_indifferent_access).not_to include(
           sessions: a_collection_including(
