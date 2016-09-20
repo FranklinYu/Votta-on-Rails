@@ -25,7 +25,6 @@ describe 'Sessions resource' do
           password: a_kind_of(String)
         )
       )
-      expect(response.body).to include('password')
     end
 
     it 'returns usable token' do
@@ -43,24 +42,24 @@ describe 'Sessions resource' do
 
     describe '#index' do
       it 'list all the sessions for current user' do
-        another_session = create(:session, user: current_session.user)
+        create(:session, user: current_session.user, comment: 'another session')
         get sessions_path
         expect(response).to be_ok
         expect(response.parsed_body.with_indifferent_access).to include(
           sessions: a_collection_including(
             a_hash_including(comment: current_session.comment),
-            a_hash_including(comment: another_session.comment)
+            a_hash_including(comment: 'another session')
           )
         )
       end
 
       it 'does not leak sessions for other users' do
-        another_session = create(:session)
+        create(:session, comment: 'another session')
         get sessions_path
         expect(response).to be_ok
         expect(response.parsed_body.with_indifferent_access).not_to include(
           sessions: a_collection_including(
-            a_hash_including(comment: another_session.comment)
+            a_hash_including(comment: 'another session')
           )
         )
       end
