@@ -1,3 +1,3 @@
 json.sessions do
-  json.array!(@sessions, :comment)
+  json.array!(@sessions, :id, :comment)
 end

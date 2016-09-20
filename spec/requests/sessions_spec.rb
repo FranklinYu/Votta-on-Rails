@@ -48,8 +48,8 @@ describe 'Sessions resource' do
         expect(response).to be_ok
         expect(response.parsed_body.with_indifferent_access).to include(
           sessions: a_collection_including(
-            {comment: current_session.comment},
-            {comment: another_session.comment}
+            a_hash_including(comment: current_session.comment),
+            a_hash_including(comment: another_session.comment)
           )
         )
       end
@@ -60,9 +60,34 @@ describe 'Sessions resource' do
         expect(response).to be_ok
         expect(response.parsed_body.with_indifferent_access).not_to include(
           sessions: a_collection_including(
-            {comment: another_session.comment}
+            a_hash_including(comment: another_session.comment)
           )
         )
+      end
+    end
+
+    describe '#update' do
+      it 'updates the session and returns the new value' do
+        target_session = create(:session, user: current_session.user, comment: 'old comment')
+        patch session_path(target_session), params: {comment: 'new comment'}
+        expect(target_session.reload.comment).to eq('new comment')
+        expect(response.parsed_body.with_indifferent_access).to include(comment: 'new comment')
+      end
+
+      it 'rejects to update sessions for other users' do
+        other_session = create(:session, comment: 'old comment')
+        patch session_path(other_session), params: {comment: 'new comment'}
+        expect(other_session.reload.comment).to eq('old comment')
+        expect(response).to be_unauthorized
+        expect(response.body).not_to include('old comment')
+      end
+
+      it 'rejects invalid request' do
+        invalid_session = create(:session, user: current_session.user, comment: 'old comment')
+        path = session_path(invalid_session)
+        invalid_session.destroy!
+        patch path, params: {comment: 'some comment'}
+        expect(response).to be_not_found
       end
     end
   end

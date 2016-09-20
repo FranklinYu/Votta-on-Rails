@@ -17,8 +17,8 @@ class SessionsController < ApplicationController
   #   ```json
   #   {
   #     "sessions": [
-  #       {"comment": "my Mac"},
-  #       {"comment": "my iPhone"}
+  #       {"id": 3, "comment": "my Mac"},
+  #       {"id": 5, "comment": "my iPhone"}
   #     ]
   #   }
   #   ```
@@ -63,6 +63,37 @@ class SessionsController < ApplicationController
     end
   end
 
-  def update; end
+  # @url /sessions/:id
+  # @action PATCH
+  #
+  # Update the information of the session.
+  #
+  # @optional [String] comment Comment of the session.
+  #
+  # @response [Session] the new session details
+  #
+  # @example_request
+  #   ```form
+  #   comment=my iMac
+  #   ```
+  #
+  # @example_response
+  #   ```json
+  #   {
+  #     "id": 5,
+  #     "comment": "my iMac"
+  #   }
+  #   ```
+  def update
+    @session = Session.find(params[:id])
+    if @session.user == @current_session.user
+      @session.update!(params.permit(:comment))
+    else
+      render plain: 'Not your session.', status: :unauthorized
+    end
+  rescue ActiveRecord::RecordNotFound
+    head :not_found
+  end
+
   def destroy; end
 end

@@ -2,6 +2,7 @@
 
 # @restful_api 1.0
 #
+# @property [Integer] id
 # @property [String] comment
 class Session < ApplicationRecord
   belongs_to :user
