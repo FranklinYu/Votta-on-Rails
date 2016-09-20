@@ -89,5 +89,28 @@ describe 'Sessions resource' do
         expect(response).to be_not_found
       end
     end
+
+    describe '#destroy' do
+      it 'destroys the session' do
+        target_session = create(:session, user: current_session.user, comment: 'old comment')
+        delete session_path(target_session)
+        expect { target_session.reload }.to raise_error(ActiveRecord::RecordNotFound)
+      end
+
+      it 'rejects to delete sessions for other users' do
+        other_session = create(:session)
+        delete session_path(other_session)
+        expect(other_session.reload).to be_valid
+        expect(response).to be_unauthorized
+      end
+
+      it 'rejects invalid request' do
+        invalid_session = create(:session, user: current_session.user, comment: 'old comment')
+        path = session_path(invalid_session)
+        invalid_session.destroy!
+        delete path
+        expect(response).to be_not_found
+      end
+    end
   end
 end

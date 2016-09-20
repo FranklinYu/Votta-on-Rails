@@ -95,5 +95,18 @@ class SessionsController < ApplicationController
     head :not_found
   end
 
-  def destroy; end
+  # @url /sessions/:id
+  # @action DELETE
+  #
+  # Log out the session.
+  def destroy
+    session = Session.find(params[:id])
+    if session.user == @current_session.user
+      session.destroy!
+    else
+      render plain: 'Not your session.', status: :unauthorized
+    end
+  rescue ActiveRecord::RecordNotFound
+    head :not_found
+  end
 end
