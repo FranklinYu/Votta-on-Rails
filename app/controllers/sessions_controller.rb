@@ -33,6 +33,7 @@ class SessionsController < ApplicationController
   #
   # @required [String] email
   # @required [String] password Plaintext password
+  # @optional [String] comment comment to identify the session
   #
   # @response a token
   #
@@ -56,7 +57,7 @@ class SessionsController < ApplicationController
     end
     user = user.authenticate(params[:password])
     if user
-      @token = user.sessions.create.id
+      @token = user.sessions.create(comment: params[:comment]).id
     else
       @error = {password: 'not match'}
       render status: :unprocessable_entity
