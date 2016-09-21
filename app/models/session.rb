@@ -5,5 +5,9 @@
 # @property [Integer] id
 # @property [String] comment
 class Session < ApplicationRecord
+  before_save do
+    self.comment ||= ''
+  end
+
   belongs_to :user
 end
