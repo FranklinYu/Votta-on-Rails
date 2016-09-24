@@ -4,6 +4,10 @@
 class SessionsController < ApplicationController
   before_action :authenticate, except: [:create]
 
+  rescue_from ActiveRecord::RecordNotFound do
+    head :not_found
+  end
+
   # @url /sessions
   # @action GET
   #
@@ -92,8 +96,6 @@ class SessionsController < ApplicationController
     else
       render plain: 'Not your session.', status: :unauthorized
     end
-  rescue ActiveRecord::RecordNotFound
-    head :not_found
   end
 
   # @url /sessions/:id
@@ -107,7 +109,5 @@ class SessionsController < ApplicationController
     else
       render plain: 'Not your session.', status: :unauthorized
     end
-  rescue ActiveRecord::RecordNotFound
-    head :not_found
   end
 end
