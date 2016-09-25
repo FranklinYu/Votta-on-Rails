@@ -30,7 +30,26 @@ class UsersController < ApplicationController
     render status: :bad_request
   end
 
-  def show; end
+  # @url /user
+  # @action GET
+  #
+  # Show the information for the current logged in user.
+  #
+  # @response [User] the current user
+  #
+  # @example_request
+  #   (no parameters)
+  #
+  # @example_response
+  #   ```json
+  #   {
+  #     "email": "current_user@example.com"
+  #   }
+  #   ```
+  def show
+    @user = @current_session.user
+  end
+
   def update; end
   def destroy; end
 end

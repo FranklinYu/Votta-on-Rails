@@ -46,6 +46,7 @@ describe 'User resource' do
       it 'shows an account' do
         get user_path
         expect(response).to be_ok
+        expect(response.parsed_body.with_indifferent_access).to include(:email)
       end
     end
 
