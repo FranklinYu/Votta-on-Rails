@@ -2,6 +2,8 @@
 
 # @restful_api 1.0
 class UsersController < ApplicationController
+  before_action :authenticate, except: [:create]
+
   # @url /user
   # @action POST
   #

@@ -25,17 +25,34 @@ end
 describe 'access control' do
   describe 'Sessions resource' do
     describe '#index' do
-      subject { Proc.new { |*options| get sessions_path, *options} }
+      subject { proc { |*options| get sessions_path, *options} }
       include_examples 'resource requiring authorization'
     end
 
     describe '#update' do
-      subject { Proc.new { |*options| patch session_path(session), *options } }
+      subject { proc { |*options| patch session_path(session), *options } }
       include_examples 'resource requiring authorization'
     end
 
     describe '#destroy' do
-      subject { Proc.new { |*options| delete session_path(session), *options } }
+      subject { proc { |*options| delete session_path(session), *options } }
+      include_examples 'resource requiring authorization'
+    end
+  end
+
+  describe 'User resource' do
+    describe '#show' do
+      subject { proc { |*options| get user_path, *options } }
+      include_examples 'resource requiring authorization'
+    end
+
+    describe '#update' do
+      subject { proc { |*options| patch user_path, *options } }
+      include_examples 'resource requiring authorization'
+    end
+
+    describe '#destroy' do
+      subject { proc { |*options| delete user_path, *options } }
       include_examples 'resource requiring authorization'
     end
   end

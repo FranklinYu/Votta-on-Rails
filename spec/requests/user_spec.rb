@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
+require 'support/logged_in_user'
 
 describe 'User resource' do
   describe '#create' do
@@ -38,24 +39,28 @@ describe 'User resource' do
     end
   end
 
-  describe '#show' do
-    it 'shows an account' do
-      get user_path
-      expect(response).to be_ok
-    end
-  end
+  context 'when logged in' do
+    let(:current_session) { create(:session) }
 
-  describe '#update' do
-    it 'updates an account' do
-      patch user_path
-      expect(response).to be_ok
+    describe '#show' do
+      it 'shows an account' do
+        get user_path
+        expect(response).to be_ok
+      end
     end
-  end
 
-  describe '#destroy' do
-    it 'destroys an account' do
-      delete user_path
-      expect(response).to be_ok
+    describe '#update' do
+      it 'updates an account' do
+        patch user_path
+        expect(response).to be_ok
+      end
+    end
+
+    describe '#destroy' do
+      it 'destroys an account' do
+        delete user_path
+        expect(response).to be_ok
+      end
     end
   end
 end
