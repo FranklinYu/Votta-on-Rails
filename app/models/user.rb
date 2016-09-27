@@ -8,5 +8,6 @@ class User < ApplicationRecord
   has_many :sessions, dependent: :destroy
 
   validates :email, presence: true, uniqueness: true
-  validates :password, length: {minimum: 8}
+  validates_presence_of :password, on: :create
+  validates_length_of :password, minimum: 8, allow_blank: true
 end
