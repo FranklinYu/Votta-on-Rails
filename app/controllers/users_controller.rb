@@ -50,6 +50,55 @@ class UsersController < ApplicationController
     @user = @current_session.user
   end
 
-  def update; end
+  # @url /user
+  # @action PATCH
+  #
+  # Update user information.
+  #
+  # @optional [String] email
+  #
+  # @response [User] the updated user
+  #
+  # @example_request_description
+  #   normal request
+  # @example_request
+  #   ```form
+  #   email=new_email@example.com
+  #   ```
+  # @example_response
+  #   ```json
+  #   {
+  #     "email": "new_email@example.com",
+  #     "password_updated": false
+  #   }
+  #   ```
+  #
+  # @example_request_description
+  #   invalid request
+  # @example_request
+  #   ```form
+  #   email=duplicated@example.com
+  #   ```
+  # @example_response
+  #   ```json
+  #   {
+  #     "error": {
+  #       "email": [
+  #         "has already been taken"
+  #       ]
+  #     }
+  #   }
+  #   ```
+  def update
+    @user = @current_session.user
+    password_digest_cache = @user.password_digest
+    if @user.update(params.permit(:email, :password))
+      @password_updated = password_digest_cache != @user.password_digest
+    else
+      @error = @user.errors
+      render status: :bad_request
+    end
+  end
+
   def destroy; end
 end

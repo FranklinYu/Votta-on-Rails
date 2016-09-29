@@ -40,7 +40,10 @@ describe 'User resource' do
   end
 
   context 'when logged in' do
-    let(:current_session) { create(:session) }
+    let(:current_session) do
+      user = create(:user, email: 'current_user@example.com')
+      create(:session, user: user)
+    end
 
     describe '#show' do
       it 'shows an account' do
@@ -52,8 +55,29 @@ describe 'User resource' do
 
     describe '#update' do
       it 'updates an account' do
-        patch user_path
+        patch user_path, params: {email: 'new_email@example.com', password: 'my-new-password'}
         expect(response).to be_ok
+        expect(response.parsed_body.with_indifferent_access).to include(
+          email: 'new_email@example.com',
+          password_updated: true
+        )
+      end
+
+      it 'rejects to update if email exists' do
+        create(:user, email: 'collision@example.com')
+        patch user_path, params: {email: 'collision@example.com'}
+        expect(response).to be_bad_request
+        expect(response.parsed_body.with_indifferent_access).to include(
+          error: a_hash_including(:email)
+        )
+      end
+
+      it 'rejects to update if new password is too short' do
+        patch user_path, params: {password: 'short'}
+        expect(response).to be_bad_request
+        expect(response.parsed_body.with_indifferent_access).to include(
+          error: a_hash_including(:password)
+        )
       end
     end
 
