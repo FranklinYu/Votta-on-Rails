@@ -82,9 +82,14 @@ describe 'User resource' do
     end
 
     describe '#destroy' do
-      it 'destroys an account' do
+      it 'destroys an account along with its sessions' do
+        user = current_session.user
+        another_session = current_session.user.sessions.create
         delete user_path
         expect(response).to be_ok
+        expect { user.reload }.to raise_error(ActiveRecord::RecordNotFound)
+        expect { current_session.reload }.to raise_error(ActiveRecord::RecordNotFound)
+        expect { another_session.reload }.to raise_error(ActiveRecord::RecordNotFound)
       end
     end
   end

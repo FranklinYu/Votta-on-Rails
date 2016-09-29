@@ -100,5 +100,11 @@ class UsersController < ApplicationController
     end
   end
 
-  def destroy; end
+  # @url /user
+  # @action DELETE
+  #
+  # Delete the user. Note that all related information will be lost permanently.
+  def destroy
+    @current_session.user.destroy!
+  end
 end
