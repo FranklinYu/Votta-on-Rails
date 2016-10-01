@@ -3,6 +3,12 @@
 require 'rails_helper'
 require 'support/logged_in_user'
 
+class Array
+  def with_indifferent_access
+    collect { |e| e.with_indifferent_access }
+  end
+end
+
 describe 'Sessions resource' do
   describe '#create' do
     let(:user) { create(:user, password: 'correct password') }
@@ -46,10 +52,8 @@ describe 'Sessions resource' do
         get sessions_path
         expect(response).to be_ok
         expect(response.parsed_body.with_indifferent_access).to include(
-          sessions: a_collection_including(
-            a_hash_including(comment: current_session.comment),
-            a_hash_including(comment: 'another session')
-          )
+          a_hash_including(comment: current_session.comment),
+          a_hash_including(comment: 'another session')
         )
       end
 
@@ -58,9 +62,7 @@ describe 'Sessions resource' do
         get sessions_path
         expect(response).to be_ok
         expect(response.parsed_body.with_indifferent_access).not_to include(
-          sessions: a_collection_including(
-            a_hash_including(comment: 'another session')
-          )
+          a_hash_including(comment: 'another session')
         )
       end
     end
