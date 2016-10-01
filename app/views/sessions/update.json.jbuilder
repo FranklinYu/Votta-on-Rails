@@ -1,1 +1,1 @@
-json.(@session, :id, :comment)
+json.extract!(@session, :id, :comment)
