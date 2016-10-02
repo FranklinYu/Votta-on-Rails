@@ -3,10 +3,7 @@
 # @restful_api 1.0
 class SessionsController < ApplicationController
   before_action :authenticate, except: [:create]
-
-  rescue_from ActiveRecord::RecordNotFound do
-    head :not_found
-  end
+  before_action :set_session, except: [:index, :create]
 
   # @url /sessions
   # @action GET
@@ -61,7 +58,7 @@ class SessionsController < ApplicationController
     end
     user = user.authenticate(params[:password])
     if user
-      @token = user.sessions.create(comment: params[:comment]).id
+      @token = user.sessions.create(session_params).id
     else
       @error = {password: 'not match'}
       render status: :unprocessable_entity
@@ -90,9 +87,8 @@ class SessionsController < ApplicationController
   #   }
   #   ```
   def update
-    @session = Session.find(params[:id])
     if @session.user == @current_session.user
-      @session.update!(params.permit(:comment))
+      @session.update!(session_params)
     else
       render plain: 'Not your session.', status: :unauthorized
     end
@@ -103,11 +99,20 @@ class SessionsController < ApplicationController
   #
   # Log out the session.
   def destroy
-    session = Session.find(params[:id])
-    if session.user == @current_session.user
-      session.destroy!
+    if @session.user == @current_session.user
+      @session.destroy!
     else
       render plain: 'Not your session.', status: :unauthorized
     end
+  end
+
+  private def session_params
+    params.permit(:comment)
+  end
+
+  private def set_session
+    @session = Session.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    head :not_found
   end
 end
