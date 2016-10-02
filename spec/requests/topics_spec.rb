@@ -18,5 +18,14 @@ RSpec.describe 'Topics resources', type: :request do
       get path
       expect(response).to be_not_found
     end
+
+    it 'shows topic' do
+      topic = create(:topic, title: 'Best Ice-Scream Scoop', body: 'Choose it!')
+      get topic_path(topic)
+      expect(response.parsed_body.with_indifferent_access).to include(
+        title: 'Best Ice-Scream Scoop',
+        body: 'Choose it!'
+      )
+    end
   end
 end

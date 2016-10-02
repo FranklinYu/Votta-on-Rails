@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# @restful_api 1.0
 class TopicsController < ApplicationController
   before_action :set_topic, only: [:show, :update, :destroy]
   before_action :authenticate, except: [:index, :show]
@@ -10,8 +11,21 @@ class TopicsController < ApplicationController
     @topics = Topic.all
   end
 
-  # GET /topics/1
-  # GET /topics/1.json
+  # @url /topics/:id
+  # @action GET
+  #
+  # Show the topic.
+  #
+  # @response [Topic]
+  #
+  # @example_request (empty request)
+  # @example_response
+  #   ```json
+  #   {
+  #     "title": "Favorite Editor",
+  #     "body": "What's your favorite editor?\nThis is important."
+  #   }
+  #   ```
   def show
   end
 
