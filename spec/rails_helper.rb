@@ -61,3 +61,9 @@ RSpec.configure do |config|
 end
 
 require_relative 'support/default_format'
+
+class Array
+  def with_indifferent_access
+    collect { |e| e.with_indifferent_access }
+  end
+end

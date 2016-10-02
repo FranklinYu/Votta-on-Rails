@@ -3,10 +3,22 @@
 require 'rails_helper'
 
 RSpec.describe 'Topics resources', type: :request do
-  describe "GET /topics" do
-    it "works! (now write some real specs)" do
+  describe '#index' do
+    it 'lists all the topics' do
+      create(:topic, title: 'First', body: 'Your first choice?')
+      create(:topic, title: 'Second', body: 'Your second choice?')
       get topics_path
-      expect(response).to have_http_status(200)
+      expect(response).to have_http_status(:ok)
+      expect(response.parsed_body.with_indifferent_access).to include(
+        a_hash_including(
+            title: 'First',
+            body: 'Your first choice?'
+        ),
+        a_hash_including(
+          title: 'Second',
+          body: 'Your second choice?'
+        )
+      )
     end
   end
 

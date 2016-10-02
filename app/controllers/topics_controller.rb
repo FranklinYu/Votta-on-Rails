@@ -5,8 +5,27 @@ class TopicsController < ApplicationController
   before_action :set_topic, only: [:show, :update, :destroy]
   before_action :authenticate, except: [:index, :show]
 
-  # GET /topics
-  # GET /topics.json
+  # @url /topics
+  # @action GET
+  #
+  # List all the topics.
+  #
+  # @example_request (empty request)
+  # @example_response
+  #   ```json
+  #   [
+  #     {
+  #       "id": 3,
+  #       "title": "Favorite Editor",
+  #       "body": "What's your favorite editor?"
+  #     },
+  #     {
+  #       "id": 5,
+  #       "title": "Favorite Cat",
+  #       "body": "What kind of cat do you like most?"
+  #     }
+  #   ]
+  #   ```
   def index
     @topics = Topic.all
   end

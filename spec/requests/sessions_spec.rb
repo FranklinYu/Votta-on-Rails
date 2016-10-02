@@ -3,12 +3,6 @@
 require 'rails_helper'
 require 'support/logged_in_user'
 
-class Array
-  def with_indifferent_access
-    collect { |e| e.with_indifferent_access }
-  end
-end
-
 describe 'Sessions resource' do
   describe '#create' do
     let(:user) { create(:user, password: 'correct password') }
