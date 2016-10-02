@@ -34,7 +34,7 @@ class SessionsController < ApplicationController
   #
   # @required [String] email
   # @required [String] password Plaintext password
-  # @optional [String] comment comment to identify the session
+  # @optional [String] session[comment] comment to identify the session
   #
   # @response a token
   #
@@ -42,6 +42,7 @@ class SessionsController < ApplicationController
   #   ```form
   #   email=registered_user@example.com
   #   password=p1aint3xt-pa55w0rd
+  #   session[comment]=foo bar
   #   ```
   #
   # @example_response
@@ -76,7 +77,7 @@ class SessionsController < ApplicationController
   #
   # @example_request
   #   ```form
-  #   comment=my iMac
+  #   session[comment]=my iMac
   #   ```
   #
   # @example_response
@@ -107,7 +108,7 @@ class SessionsController < ApplicationController
   end
 
   private def session_params
-    params.permit(:comment)
+    params.permit(session: [:comment])[:session]
   end
 
   private def set_session
