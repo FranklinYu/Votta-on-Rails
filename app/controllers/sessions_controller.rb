@@ -108,7 +108,7 @@ class SessionsController < ApplicationController
   end
 
   private def session_params
-    params.permit(session: [:comment])[:session]
+    params.require_or_empty(:session).permit(:comment)
   end
 
   private def set_session
