@@ -14,7 +14,7 @@ describe 'User resource' do
     end
 
     it 'rejects request with duplicated email' do
-      user = create(:user, email: 'current_user@example.com', password: 'old password')
+      create(:user, email: 'current_user@example.com', password: 'old password')
       post user_path, params: {email: 'current_user@example.com', password: 'new password'}
       expect(response).to be_bad_request
       expect(response.parsed_body.with_indifferent_access).to include(
