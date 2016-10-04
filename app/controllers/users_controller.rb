@@ -25,6 +25,7 @@ class UsersController < ApplicationController
   #   ```
   def create
     User.create!(params.permit(:email, :password))
+    render status: :created
   rescue ActiveRecord::RecordInvalid => e
     @error = e.record.errors
     render status: :bad_request

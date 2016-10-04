@@ -12,47 +12,47 @@ shared_examples 'resource requiring authorization' do
 
   it 'is inaccessible with invalid token' do
     invalid_session_id = Session.count + 2
-    subject.call(headers: {authorization: "Token #{invalid_session_id}"})
+    subject.call(authorization: "Token #{invalid_session_id}")
     expect(response).to have_http_status(:unauthorized)
   end
 
   it 'is accessible with valid token' do
-    subject.call(headers: {authorization: "Token #{session.id}"})
-    expect(response).to have_http_status(:ok)
+    subject.call(authorization: "Token #{session.id}")
+    expect(response).to have_http_status(:success)
   end
 end
 
 describe 'access control' do
   describe 'Sessions resource' do
     describe '#index' do
-      subject { proc { |*options| get sessions_path, *options} }
+      subject { proc { |hs| get sessions_path, headers: hs } }
       include_examples 'resource requiring authorization'
     end
 
     describe '#update' do
-      subject { proc { |*options| patch session_path(session), *options } }
+      subject { proc { |hs| patch session_path(session), headers: hs } }
       include_examples 'resource requiring authorization'
     end
 
     describe '#destroy' do
-      subject { proc { |*options| delete session_path(session), *options } }
+      subject { proc { |hs| delete session_path(session), headers: hs } }
       include_examples 'resource requiring authorization'
     end
   end
 
   describe 'User resource' do
     describe '#show' do
-      subject { proc { |*options| get user_path, *options } }
+      subject { proc { |hs| get user_path, headers: hs } }
       include_examples 'resource requiring authorization'
     end
 
     describe '#update' do
-      subject { proc { |*options| patch user_path, *options } }
+      subject { proc { |hs| patch user_path, headers: hs } }
       include_examples 'resource requiring authorization'
     end
 
     describe '#destroy' do
-      subject { proc { |*options| delete user_path, *options } }
+      subject { proc { |hs| delete user_path, headers: hs } }
       include_examples 'resource requiring authorization'
     end
   end
