@@ -15,7 +15,7 @@ describe 'Sessions resource' do
 
     it 'fails with email not registered' do
       post sessions_path, params: {email: 'not-registered@example.com'}
-      expect(response).to be_not_found
+      expect(response).to have_http_status(:not_found)
       expect(response.parsed_body.with_indifferent_access).to include(
         error: a_hash_including(
           email: a_string_including('not-registered@example.com')
@@ -25,7 +25,7 @@ describe 'Sessions resource' do
 
     it 'fails with wrong password' do
       post sessions_path, params: {email: user.email, password: 'wrong password'}
-      expect(response).to be_unprocessable
+      expect(response).to have_http_status(:unprocessable_entity)
       expect(response.parsed_body.with_indifferent_access).to include(
         error: a_hash_including(
           password: a_kind_of(String)
@@ -35,11 +35,11 @@ describe 'Sessions resource' do
 
     it 'returns usable token' do
       post sessions_path, params: {email: user.email, password: 'correct password'}
-      expect(response).to be_ok
+      expect(response).to have_http_status(:ok)
       expect(response.parsed_body.with_indifferent_access).to include(:token)
       token = response.parsed_body['token']
       get sessions_path, headers: {authorization: "Token #{token}"}
-      expect(response).to be_ok
+      expect(response).to have_http_status(:ok)
     end
   end
 
@@ -50,7 +50,7 @@ describe 'Sessions resource' do
       it 'list all the sessions for current user' do
         create(:session, user: current_session.user, comment: 'another session')
         get sessions_path
-        expect(response).to be_ok
+        expect(response).to have_http_status(:ok)
         expect(response.parsed_body.with_indifferent_access).to include(
           a_hash_including(comment: current_session.comment),
           a_hash_including(comment: 'another session')
@@ -60,7 +60,7 @@ describe 'Sessions resource' do
       it 'does not leak sessions for other users' do
         create(:session, comment: 'another session')
         get sessions_path
-        expect(response).to be_ok
+        expect(response).to have_http_status(:ok)
         expect(response.parsed_body.with_indifferent_access).not_to include(
           a_hash_including(comment: 'another session')
         )
@@ -79,7 +79,7 @@ describe 'Sessions resource' do
         other_session = create(:session, comment: 'old comment')
         patch session_path(other_session), params: {session: {comment: 'new comment'}}
         expect(other_session.reload.comment).to eq('old comment')
-        expect(response).to be_unauthorized
+        expect(response).to have_http_status(:unauthorized)
         expect(response.body).not_to include('old comment')
       end
 
@@ -88,7 +88,7 @@ describe 'Sessions resource' do
         path = session_path(invalid_session)
         invalid_session.destroy!
         patch path, params: {session: {comment: 'some comment'}}
-        expect(response).to be_not_found
+        expect(response).to have_http_status(:not_found)
       end
     end
 
@@ -103,7 +103,7 @@ describe 'Sessions resource' do
         other_session = create(:session)
         delete session_path(other_session)
         expect(other_session.reload).to be_valid
-        expect(response).to be_unauthorized
+        expect(response).to have_http_status(:unauthorized)
       end
 
       it 'rejects invalid request' do
@@ -111,7 +111,7 @@ describe 'Sessions resource' do
         path = session_path(invalid_session)
         invalid_session.destroy!
         delete path
-        expect(response).to be_not_found
+        expect(response).to have_http_status(:not_found)
       end
     end
   end
