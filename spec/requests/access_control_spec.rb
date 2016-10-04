@@ -18,7 +18,7 @@ shared_examples 'resource requiring authorization' do
 
   it 'is accessible with valid token' do
     subject.call(authorization: "Token #{session.id}")
-    expect(response).to have_http_status(:ok)
+    expect(response).to have_http_status(:success)
   end
 end
 
