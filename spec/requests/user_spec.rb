@@ -7,7 +7,7 @@ describe 'User resource' do
   describe '#create' do
     it 'creates an account' do
       post user_path, params: {email: 'new_user@example.com', password: 'pass-pass'}
-      expect(response).to have_http_status(:ok)
+      expect(response).to have_http_status(:created)
       user = User.find_by_email('new_user@example.com')
       expect(user).not_to be_falsey
       expect(user.authenticate('pass-pass')).not_to be_falsey

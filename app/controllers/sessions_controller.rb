@@ -60,6 +60,7 @@ class SessionsController < ApplicationController
     user = user.authenticate(params[:password])
     if user
       @token = user.sessions.create(session_params).id
+      render status: :created
     else
       @error = {password: 'not match'}
       render status: :unprocessable_entity

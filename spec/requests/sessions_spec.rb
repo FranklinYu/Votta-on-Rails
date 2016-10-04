@@ -35,7 +35,7 @@ describe 'Sessions resource' do
 
     it 'returns usable token' do
       post sessions_path, params: {email: user.email, password: 'correct password'}
-      expect(response).to have_http_status(:ok)
+      expect(response).to have_http_status(:created)
       expect(response.parsed_body.with_indifferent_access).to include(:token)
       token = response.parsed_body['token']
       get sessions_path, headers: {authorization: "Token #{token}"}
