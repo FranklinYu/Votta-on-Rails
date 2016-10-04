@@ -56,4 +56,23 @@ describe 'access control' do
       include_examples 'resource requiring authorization'
     end
   end
+
+  describe 'Topics resource' do
+    describe '#create' do
+      subject { proc { |hs| post topics_path, params: {topic: {title: 'my topic'}}, headers: hs } }
+      include_examples 'resource requiring authorization'
+    end
+
+    describe '#update' do
+      before(:context) { create(:topic) }
+      subject { proc { |hs| patch topic_path(Topic.first!), headers: hs } }
+      include_examples 'resource requiring authorization'
+    end
+
+    describe '#destroy' do
+      before(:example) { create(:topic) }
+      subject { proc { |hs| delete topic_path(Topic.first!), headers: hs } }
+      include_examples 'resource requiring authorization'
+    end
+  end
 end
