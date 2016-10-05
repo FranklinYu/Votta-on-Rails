@@ -48,15 +48,36 @@ class TopicsController < ApplicationController
   def show
   end
 
-  # POST /topics
-  # POST /topics.json
+  # @url /topics
+  # @action POST
+  #
+  # Create a topic to vote for.
+  #
+  # @required [String] topic[title]
+  # @optional [String] topic[body]
+  #
+  # @response [Topic]
+  #
+  # @example_request
+  #   ```form
+  #   topic[title]=Best Restaurant
+  #   topic[body]=What's your favorite restaurant?\nDecide it!
+  #   ```
+  # @example_response
+  #   ```json
+  #   {
+  #     "id": 3,
+  #     "title": "Favorite Editor",
+  #     "body": "What's your favorite editor? Come to vote!"
+  #   }
+  #   ```
   def create
-    @topic = @current_session.user.topics.new(topic_params)
-
-    if @topic.save
-      render :show, status: :created, location: @topic
+    @topic = @current_session.user.topics.create(topic_params)
+    if @topic.valid?
+      render status: :created
     else
-      render json: @topic.errors, status: :unprocessable_entity
+      @error = @topic.errors
+      render status: :unprocessable_entity
     end
   end
 
