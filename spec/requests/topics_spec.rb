@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
+require 'support/logged_in_user'
 
 RSpec.describe 'Topics resources', type: :request do
   describe '#index' do
@@ -37,6 +38,24 @@ RSpec.describe 'Topics resources', type: :request do
       expect(response.parsed_body.with_indifferent_access).to include(
         title: 'Best Ice-Scream Scoop',
         body: 'Choose it!'
+      )
+    end
+  end
+
+  describe '#create' do
+    let(:current_session) { create(:session) }
+
+    it 'creates a topic' do
+      params = {topic: {title: 'new topic'}}
+      expect { post topics_path, params: params }.to change { Topic.count }.by(1)
+      expect(response).to have_http_status(:created)
+    end
+
+    it 'refuses to create topic without title' do
+      post topics_path
+      expect(response).to have_http_status(:unprocessable_entity)
+      expect(response.parsed_body.with_indifferent_access).to include(
+        error: a_hash_including(:title)
       )
     end
   end
