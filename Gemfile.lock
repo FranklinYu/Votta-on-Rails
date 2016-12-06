@@ -40,6 +40,7 @@ GEM
       tzinfo (~> 1.1)
     arel (7.1.1)
     bcrypt (3.1.11)
+    browser (2.3.0)
     builder (3.2.2)
     byebug (9.0.5)
     concurrent-ruby (1.0.2)
@@ -163,6 +164,7 @@ PLATFORMS
 
 DEPENDENCIES
   bcrypt (~> 3.1.7)
+  browser (~> 2.3.0)
   byebug
   factory_girl_rails (~> 4.7)
   faker (~> 1.6)

@@ -57,6 +57,9 @@ class SessionsController < ApplicationController
       @error = {email: "no user with email: #{params[:email]}"}
       return render status: :not_found
     end
+
+    default_comment_to_user_agent
+
     user = user.authenticate(params[:password])
     if user
       @token = user.sessions.create(session_params).id
@@ -64,6 +67,16 @@ class SessionsController < ApplicationController
     else
       @error = {password: 'not match'}
       render status: :unprocessable_entity
+    end
+  end
+
+  private def default_comment_to_user_agent
+    params[:session] ||= {}
+    b = Browser.new(request.user_agent)
+    if (b.known?)
+      params[:session][:comment] ||= "#{b.name} #{b.full_version} on #{b.platform.name} #{b.platform.version}"
+    else
+      params[:session][:comment] ||= request.user_agent
     end
   end
 
