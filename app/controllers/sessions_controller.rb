@@ -52,17 +52,17 @@ class SessionsController < ApplicationController
   #   }
   #   ```
   def create
-    user = User.find_by_email(params[:email])
-    if user.nil?
+    @user = User.find_by_email(params[:email])
+    if @user.nil?
       @error = {email: "no user with email: #{params[:email]}"}
       return render status: :not_found
     end
 
     default_comment_to_user_agent
 
-    user = user.authenticate(params[:password])
-    if user
-      @token = user.sessions.create(session_params).id
+    @user = @user.authenticate(params[:password])
+    if @user
+      @token = @user.sessions.create(session_params).id
       render status: :created
     else
       @error = {password: 'not match'}
