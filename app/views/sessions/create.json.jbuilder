@@ -3,6 +3,7 @@ if @error.nil?
   json.user do
     json.extract!(@user, :email)
   end
+  json.id @session_id
 else
   json.error @error
 end

@@ -63,6 +63,7 @@ class SessionsController < ApplicationController
     @user = @user.authenticate(params[:password])
     if @user
       @token = @user.sessions.create(session_params).id
+      @session_id = @token
       render status: :created
     else
       @error = {password: 'not match'}
