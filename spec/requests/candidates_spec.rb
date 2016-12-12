@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe "Candidates", type: :request do
   describe "GET /candidates" do
     it "works! (now write some real specs)" do
-      get candidates_path
+      get topic_candidates_path(Topic.first!)
       expect(response).to have_http_status(200)
     end
   end

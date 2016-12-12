@@ -78,7 +78,7 @@ describe 'access control' do
 
   describe 'Candidates resource' do
     describe '#create' do
-      subject { proc { |hs| post candidates_path, params: {candidate: {body: 'my two cents', topic_id: 1}}, headers: hs } }
+      subject { proc { |hs| post topic_candidates_path(Topic.first!), params: {candidate: {body: 'my two cents'}}, headers: hs } }
       include_examples 'resource requiring authorization'
     end
 

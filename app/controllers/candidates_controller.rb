@@ -33,6 +33,7 @@ class CandidatesController < ApplicationController
     if @candidate.update(candidate_params)
       render :show, status: :ok, location: @candidate
     else
+      byebug
       render json: @candidate.errors, status: :unprocessable_entity
     end
   end
@@ -51,7 +52,7 @@ class CandidatesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def candidate_params
-      params.require_or_empty(:candidate).permit(:body, :topic_id)
-        .merge(user_id: @current_session.user.id)
+      params.require_or_empty(:candidate).permit(:body)
+        .merge(user_id: @current_session.user.id, topic_id: params['topic_id'] || @candidate.topic_id)
     end
 end
