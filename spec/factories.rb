@@ -16,4 +16,10 @@ FactoryGirl.define do
     title { Faker::Lorem.sentence }
     body { Faker::Lorem.paragraph }
   end
+
+  factory :candidate do
+    user
+    topic
+    body { Faker::Lorem.paragraph }
+  end
 end

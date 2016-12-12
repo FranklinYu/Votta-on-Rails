@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_secure_password
   has_many :sessions, dependent: :destroy
   has_many :topics
+  has_many :candidates
 
   validates :email, presence: true, uniqueness: true
   validates_presence_of :password, on: :create
