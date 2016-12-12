@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CandidatesController < ApplicationController
   before_action :set_candidate, only: [:show, :update, :destroy]
 
