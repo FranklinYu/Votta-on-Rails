@@ -46,6 +46,7 @@ class TopicsController < ApplicationController
   #   }
   #   ```
   def show
+    @candidates = @topic.candidates
   end
 
   # @url /topics
