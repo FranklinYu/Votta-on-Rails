@@ -2,9 +2,9 @@
 
 # @restful_api 1.0
 #
-# @property [String] body body of the candidate. Non-empty. Warning: unsanitized
-# @property [User] user the creator of this candidate, or null if the user is destroyed
-# @property [Topic] topic this candidate belongs to
+# @property body [String] body of the candidate. Non-empty. *Warning: unsanitized*
+# @property user [User] the creator of this candidate, or null if the user is destroyed
+# @property topic [Topic] this candidate belongs to
 class Candidate < ApplicationRecord
   belongs_to :topic
   belongs_to :user

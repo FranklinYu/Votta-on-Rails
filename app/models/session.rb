@@ -2,8 +2,8 @@
 
 # @restful_api 1.0
 #
-# @property [Integer] id
-# @property [String] comment
+# @property id [Integer]
+# @property comment [String]
 class Session < ApplicationRecord
   before_save do
     self.comment ||= ''

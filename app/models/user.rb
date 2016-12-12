@@ -2,7 +2,7 @@
 
 # @restful_api 1.0
 #
-# @property [String] email
+# @property email [String]
 class User < ApplicationRecord
   has_secure_password
   has_many :sessions, dependent: :destroy
