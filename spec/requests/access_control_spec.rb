@@ -75,4 +75,23 @@ describe 'access control' do
       include_examples 'resource requiring authorization'
     end
   end
+
+  describe 'Candidates resource' do
+    describe '#create' do
+      subject { proc { |hs| post candidates_path, params: {candidate: {body: 'my two cents', topic_id: 1}}, headers: hs } }
+      include_examples 'resource requiring authorization'
+    end
+
+    describe '#update' do
+      before(:context) { create(:candidate) }
+      subject { proc { |hs| patch candidate_path(Candidate.first!), headers: hs } }
+      include_examples 'resource requiring authorization'
+    end
+
+    describe '#destroy' do
+      before(:example) { create(:candidate) }
+      subject { proc { |hs| delete candidate_path(Candidate.first!), headers: hs } }
+      include_examples 'resource requiring authorization'
+    end
+  end
 end

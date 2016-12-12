@@ -2,6 +2,7 @@
 
 class CandidatesController < ApplicationController
   before_action :set_candidate, only: [:show, :update, :destroy]
+  before_action :authenticate, except: [:index, :show]
 
   # GET /candidates
   # GET /candidates.json
@@ -50,6 +51,7 @@ class CandidatesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def candidate_params
-      params.require(:candidate).permit(:body, :topic_id, :user_id)
+      params.require_or_empty(:candidate).permit(:body, :topic_id)
+        .merge(user_id: @current_session.user.id)
     end
 end
