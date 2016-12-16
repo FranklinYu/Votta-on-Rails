@@ -17,7 +17,7 @@ tom.sessions.create!(comment: 'my Ruby bot')
 
 t = jack.topics.create!(
   title: 'What is your favorite salad dressing?',
-  body: "There are many, but some of them are really classic and exellent. Dressings with different ingredients are regarded as different ones; ones with same ingredient list, but different amount, are regarded as the same ones."
+  body: "There are many, but some of them are really classic and excellent. Dressings with different ingredients are regarded as different ones; ones with same ingredient list, but different amount, are regarded as the same ones."
 )
 jack.topics.create!(
   title: 'Your favorite text editor software?',
