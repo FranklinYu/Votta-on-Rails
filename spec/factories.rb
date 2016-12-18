@@ -22,4 +22,9 @@ FactoryGirl.define do
     topic
     body { Faker::Lorem.paragraph }
   end
+
+  factory :vote do
+    user
+    candidate
+  end
 end

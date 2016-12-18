@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_many :sessions, dependent: :destroy
   has_many :topics
   has_many :candidates
+  has_many :votes
 
   validates :email, presence: true, uniqueness: true
   validates_presence_of :password, on: :create

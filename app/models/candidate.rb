@@ -8,5 +8,6 @@
 class Candidate < ApplicationRecord
   belongs_to :topic
   belongs_to :user
+  has_many :votes
   validates :body, presence: true
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161212084517) do
+ActiveRecord::Schema.define(version: 20161218072015) do
 
   create_table "candidates", force: :cascade do |t|
     t.text     "body"
@@ -45,6 +45,15 @@ ActiveRecord::Schema.define(version: 20161212084517) do
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.index ["email"], name: "index_users_on_email", unique: true
+  end
+
+  create_table "votes", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "candidate_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["candidate_id"], name: "index_votes_on_candidate_id"
+    t.index ["user_id"], name: "index_votes_on_user_id"
   end
 
 end
