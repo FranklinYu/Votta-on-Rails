@@ -23,4 +23,10 @@ class ApplicationController < ActionController::API
       end
     end
   end
+
+  def try_authenticate
+    authenticate_with_http_token do |token|
+      @current_session = Session.find_by_id(token)
+    end
+  end
 end

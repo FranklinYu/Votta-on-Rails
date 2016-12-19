@@ -4,6 +4,7 @@
 class TopicsController < ApplicationController
   before_action :set_topic, only: [:show, :update, :destroy]
   before_action :authenticate, except: [:index, :show]
+  before_action :try_authenticate, only: :show
 
   # @url /topics
   # @action GET

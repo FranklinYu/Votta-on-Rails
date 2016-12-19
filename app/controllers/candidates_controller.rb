@@ -56,11 +56,11 @@ class CandidatesController < ApplicationController
   end
 
   def cancel_up_vote
-    vote = @current_session.user.votes.where(candidate: @candidate)
-    if vote.empty?
+    vote = Vote.find_by_user_id_and_candidate_id(@current_session.user.id, @candidate.id)
+    if vote.nil?
       render status: :not_found
     else
-      vote.first.destroy
+      vote.destroy
     end
   end
 
