@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class CandidatesController < ApplicationController
-  before_action :set_candidate, only: [:show, :update, :destroy]
+  before_action :set_candidate, except: [:index, :create]
   before_action :authenticate, except: [:index, :show]
 
   # GET /candidates
@@ -42,6 +42,26 @@ class CandidatesController < ApplicationController
   # DELETE /candidates/1.json
   def destroy
     @candidate.destroy
+  end
+
+  def vote_up
+    vote = @candidate.votes.create(user: @current_session.user)
+    @errors = vote.errors unless @candidate.valid?
+    if @candidate.valid?
+      render status: :created
+    else
+      @errors = vote.errors
+      render status: :unprocessable_entity
+    end
+  end
+
+  def cancel_up_vote
+    vote = @current_session.user.votes.where(candidate: @candidate)
+    if vote.empty?
+      render status: :not_found
+    else
+      vote.first.destroy
+    end
   end
 
   private

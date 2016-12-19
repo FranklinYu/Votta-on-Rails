@@ -1,7 +1,12 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  resources :candidates, except: [:index, :create]
+  resources :candidates, except: [:index, :create] do
+    member do
+      post 'vote-up'
+      delete 'vote-up', to: 'candidates#cancel_up_vote'
+    end
+  end
   resources :topics do
     resources :candidates, only: [:index, :create]
   end
