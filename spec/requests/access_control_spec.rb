@@ -64,7 +64,7 @@ describe 'access control' do
     end
 
     describe '#update' do
-      before(:context) { create(:topic) }
+      before(:example) { create(:topic) }
       subject { proc { |hs| patch topic_path(Topic.first!), headers: hs } }
       include_examples 'resource requiring authorization'
     end
@@ -77,13 +77,15 @@ describe 'access control' do
   end
 
   describe 'Candidates resource' do
+    before(:example) { create(:topic) }
+
     describe '#create' do
       subject { proc { |hs| post topic_candidates_path(Topic.first!), params: {candidate: {body: 'my two cents'}}, headers: hs } }
       include_examples 'resource requiring authorization'
     end
 
     describe '#update' do
-      before(:context) { create(:candidate) }
+      before(:example) { create(:candidate) }
       subject { proc { |hs| patch candidate_path(Candidate.first!), headers: hs } }
       include_examples 'resource requiring authorization'
     end
