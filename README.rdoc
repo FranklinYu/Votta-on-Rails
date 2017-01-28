@@ -38,7 +38,15 @@ Then install the bundle with Bundler
 
   $ bundle install --deployment --without development test doc
 
-Now you can launch it with Puma:
+Set up the environment variables +DATABASE_URL+, +RACK_ENV+, +RAILS_ENV+,
+and +SECRET_KEY_BASE+. Typically +RACK_ENV+ and +RAILS_ENV+ should both be
++production+; +DATABASE_URL+ should be a
+{connection string}[https://www.postgresql.org/docs/9.6/static/libpq-connect.html#LIBPQ-CONNSTRING].
+Now migrate the database:
+
+  $ bundle exec rails db:migrate
+
+Now you can launch Votta with Puma:
 
   $ bundle exec puma -C config/puma.rb
 
