@@ -1,4 +1,6 @@
-= README
+= Votta on Rails
+
+{<img src="https://gemnasium.com/badges/github.com/franklinyu/Votta-on-Rails.svg" alt="Dependency Status" />}[https://gemnasium.com/github.com/franklinyu/Votta-on-Rails]
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
