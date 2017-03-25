@@ -22,8 +22,9 @@ Then install the bundle with Bundler
 Set up the environment variables +DATABASE_URL+, +RAILS_ENV+, and
 +SECRET_KEY_BASE+. Typically +RAILS_ENV+ should be +production+; +DATABASE_URL+
 should be a
-{connection string}[https://www.postgresql.org/docs/9.6/static/libpq-connect.html#LIBPQ-CONNSTRING].
-Now migrate the database:
+{connection string}[https://www.postgresql.org/docs/9.6/static/libpq-connect.html#LIBPQ-CONNSTRING];
++SECRET_KEY_BASE+ should be bytes (over 30 bytes, typically 128 bytes) in
+hexadecimal form. Now migrate the database:
 
   $ bundle exec rails db:migrate
 
