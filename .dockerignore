@@ -27,7 +27,6 @@ docker-compose.yaml
 .dockerignore
 
 # things unneccesary in container
-*.rodc
 *.markdown
 .gitignore
 .git/
