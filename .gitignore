@@ -22,3 +22,7 @@
 
 # Ignore generated documentations
 /doc/
+
+# Docker Compose environment file
+# see https://docs.docker.com/compose/env-file/
+/.env

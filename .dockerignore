@@ -1,0 +1,33 @@
+# See https://docs.docker.com/engine/reference/builder/#dockerignore-file
+# for more about Docker ignoring files.
+
+# Ignore bundler config.
+.bundle/
+
+# Ignore the default SQLite database.
+db/*.sqlite3
+db/*.sqlite3-journal
+
+# Ignore all logfiles and tempfiles.
+log/*
+tmp/*
+!log/.keep
+!tmp/.keep
+
+# Ignore Byebug command history file.
+.byebug_history
+
+# Ignore generated documentations
+doc/
+
+# Docker related files
+.env
+Dockerfile
+docker-compose.yaml
+.dockerignore
+
+# things unneccesary in container
+*.rodc
+*.markdown
+.gitignore
+.git/

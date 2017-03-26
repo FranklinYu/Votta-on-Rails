@@ -35,6 +35,23 @@ Now you can launch Votta with Puma:
 Note that the +-C+ flag is aliased to +--config+. You can change the port
 (default to 3000) with environment variable +PORT+.
 
+=== deploy with Docker
+
+The easiest way to use Docker[https://www.docker.com/] is
+{Docker Compose}[https://docs.docker.com/compose/]. Docker 1.12.0 or above, and
+Docker-Compose 1.6.0 or above, are required. Concerning the environment
+variables, only +SECRET_KEY_BASE+ is required when deploying with Docker; +PORT+
+is respected if found. They can be specified as environment variables, like
+
+  $ SECRET_KEY_BASE=deadbeef PORT=8080 docker-compose up
+
+or specified in {environment file}[https://docs.docker.com/compose/env-file/]
+
+  $ cat .env
+  SECRET_KEY_BASE=deadbeef
+  PORT=8080
+  $ docker-compose up
+
 == test
 
 Prerequisite:

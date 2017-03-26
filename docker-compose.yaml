@@ -1,0 +1,19 @@
+version: "2.1"
+
+services:
+  web:
+    build: .
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgresql://postgres@db/main
+      SECRET_KEY_BASE:
+    ports:
+      - "${PORT:-3000}:3000"
+  db:
+    image: postgres:9.6-alpine
+    volumes:
+      - data:/var/lib/postgresql/data
+
+volumes:
+  data:
