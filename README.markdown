@@ -57,6 +57,13 @@ or specified in [environment file][]
 [Docker Compose]: https://docs.docker.com/compose/
 [environment file]: https://docs.docker.com/compose/env-file/
 
+Instead of downloading (or cloning) the entire repository, one can also download
+the `docker-compose.yaml` only, and replace the `build: .` with
+`image: franklinyu/votta-web`, thanks to [Docker Hub]. The images are built by
+continuous integration, so images there would at least pass all the tests.
+
+[Docker Hub]: https://hub.docker.com/r/franklinyu/votta-web/
+
 ## test
 
 Prerequisite:
