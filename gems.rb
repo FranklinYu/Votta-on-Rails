@@ -44,6 +44,7 @@ group :test do
   gem 'factory_girl_rails', '~> 4.7'
   gem 'faker', '~> 1.6'
   gem 'fuubar'
+  gem 'simplecov', require: false
 end
 
 group :production do
