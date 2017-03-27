@@ -33,7 +33,6 @@ class CandidatesController < ApplicationController
     if @candidate.update(candidate_params)
       render :show, status: :ok, location: @candidate
     else
-      byebug
       render json: @candidate.errors, status: :unprocessable_entity
     end
   end
