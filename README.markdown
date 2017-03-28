@@ -3,6 +3,8 @@
 [![Dependency Status](https://gemnasium.com/badges/github.com/franklinyu/Votta-on-Rails.svg)](https://gemnasium.com/github.com/franklinyu/Votta-on-Rails)
 [![Build Status](https://semaphoreci.com/api/v1/franklinyu/votta-on-rails/branches/master/badge.svg)](https://semaphoreci.com/franklinyu/votta-on-rails)
 [![Security](https://hakiri.io/github/franklinyu/Votta-on-Rails/master.svg)](https://hakiri.io/github/franklinyu/Votta-on-Rails/master)
+[![Code Climate](https://codeclimate.com/github/franklinyu/Votta-on-Rails/badges/gpa.svg)](https://codeclimate.com/github/franklinyu/Votta-on-Rails)
+[![Test Coverage](https://codeclimate.com/github/franklinyu/Votta-on-Rails/badges/coverage.svg)](https://codeclimate.com/github/franklinyu/Votta-on-Rails/coverage)
 
 ## deploy on server
 
