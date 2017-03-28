@@ -1,0 +1,324 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Class: TopicsController
+  
+    &mdash; Votta API reference
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" charset="utf-8" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" charset="utf-8" />
+
+  <link rel="stylesheet" href="css/custom.css" type="text/css" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  hasFrames = window.top.frames.main ? true : false;
+  relpath = '';
+  framesUrl = "frames.html#!TopicsController.html";
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/rest_plugin.js"></script>
+
+
+  </head>
+  <body>
+    <div id="header">
+      <div id="search">
+  
+    <a class="full_list_link" id="resource_list_link"
+        href="resource_list.html">
+      Resources
+    </a>
+  
+    <a class="full_list_link" id="object_list_link"
+        href="object_list.html">
+      Objects
+    </a>
+  
+</div>
+    </div>
+
+    <iframe id="search_frame"></iframe>
+
+    <div id="content" style="padding-top: 12px;">
+		<div class="service">
+  <h1 class="noborder title">Votta API reference</h1>
+    <a class="back" href="index.html" title="back to the overview">&laquo; back to overview</a>
+    <h2>Topics [1.0]</h2>
+    
+
+  <div id="Services" class="method_details_list">
+    
+		<div class="method">
+      <h3>index</h3>
+			<p class="method_desc">List all the topics.</p>
+
+      
+        <div class="resource_url even">
+          <h4>URL</h4>
+          <span class="action">GET</span>
+          <span class="url">/topics</span>
+        </div>
+      
+
+      
+
+
+      
+
+
+      
+        
+
+
+      
+
+			
+				<div class="examples">
+					<h4>Examples</h4>
+					
+						<div class="example">
+							
+							
+							
+							<span class="description">
+								
+							</span>
+							<span class="hash request">
+								<strong class="type">Request</strong>
+								
+									
+										(empty request)
+									
+								
+							</span>
+							<span class="hash response">
+								<strong class="type">Response</strong>
+								
+									
+										<pre class="code json"><code class="json">[
+  {
+    &quot;id&quot;: 3,
+    &quot;title&quot;: &quot;Favorite Editor&quot;,
+    &quot;body&quot;: &quot;What&#39;s your favorite editor?&quot;
+  },
+  {
+    &quot;id&quot;: 5,
+    &quot;title&quot;: &quot;Favorite Cat&quot;,
+    &quot;body&quot;: &quot;What kind of cat do you like most?&quot;
+  }
+]
+</code></pre>
+
+									
+								
+							</span>
+							<span class="description">
+								
+							</span>
+						</div>
+					
+				</div>
+			
+		</div>
+    
+		<div class="method">
+      <h3>show</h3>
+			<p class="method_desc">Show the topic.</p>
+
+      
+        <div class="resource_url odd">
+          <h4>URL</h4>
+          <span class="action">GET</span>
+          <span class="url">/topics/:id</span>
+        </div>
+      
+
+      
+
+
+      
+
+
+      
+        <div class="parameters even">
+          <h4>Response Object</h4>
+          <ul>
+            <li>
+              <span class="type"><tt><span class='object_link'><a href="Topic.html" title="Topic (class)">Topic</a></span></tt></span>
+              <span class="text"></span>
+            </li>
+          </ul>
+        </div>
+      
+
+			
+				<div class="examples">
+					<h4>Examples</h4>
+					
+						<div class="example">
+							
+							
+							
+							<span class="description">
+								
+							</span>
+							<span class="hash request">
+								<strong class="type">Request</strong>
+								
+									
+										(empty request)
+									
+								
+							</span>
+							<span class="hash response">
+								<strong class="type">Response</strong>
+								
+									
+										<pre class="code json"><code class="json">{
+  &quot;title&quot;: &quot;Favorite Editor&quot;,
+  &quot;body&quot;: &quot;What&#39;s your favorite editor?\nThis is important.&quot;
+}
+</code></pre>
+
+									
+								
+							</span>
+							<span class="description">
+								
+							</span>
+						</div>
+					
+				</div>
+			
+		</div>
+    
+		<div class="method">
+      <h3>create</h3>
+			<p class="method_desc">Create a topic to vote for.</p>
+
+      
+        <div class="resource_url odd">
+          <h4>URL</h4>
+          <span class="action">POST</span>
+          <span class="url">/topics</span>
+        </div>
+      
+
+      
+
+  <div class="parameters even">
+    
+      <h4>Required Parameters</h4>
+    
+		<ul>
+  		
+				<li>
+					<span class="name">topic[title]</span>
+					<span class="type"><tt>String</tt></span>
+					<span class="text"></span>
+				</li>
+  		
+	  </ul>
+	</div>
+
+
+      
+
+  <div class="parameters odd">
+    
+      <h4>Optional Parameters</h4>
+    
+		<ul>
+  		
+				<li>
+					<span class="name">topic[body]</span>
+					<span class="type"><tt>String</tt></span>
+					<span class="text"></span>
+				</li>
+  		
+	  </ul>
+	</div>
+
+
+      
+        <div class="parameters even">
+          <h4>Response Object</h4>
+          <ul>
+            <li>
+              <span class="type"><tt><span class='object_link'><a href="Topic.html" title="Topic (class)">Topic</a></span></tt></span>
+              <span class="text"></span>
+            </li>
+          </ul>
+        </div>
+      
+
+			
+				<div class="examples">
+					<h4>Examples</h4>
+					
+						<div class="example">
+							
+							
+							
+							<span class="description">
+								
+							</span>
+							<span class="hash request">
+								<strong class="type">Request</strong>
+								
+									
+										<pre class="code form"><code class="form">topic[title]=Best Restaurant
+topic[body]=What&#39;s your favorite restaurant?\nDecide it!
+</code></pre>
+
+									
+								
+							</span>
+							<span class="hash response">
+								<strong class="type">Response</strong>
+								
+									
+										<pre class="code json"><code class="json">{
+  &quot;id&quot;: 3,
+  &quot;title&quot;: &quot;Favorite Editor&quot;,
+  &quot;body&quot;: &quot;What&#39;s your favorite editor? Come to vote!&quot;
+}
+</code></pre>
+
+									
+								
+							</span>
+							<span class="description">
+								
+							</span>
+						</div>
+					
+				</div>
+			
+		</div>
+    
+  </div>
+
+
+</div>
+
+
+	</div>
+
+    <div id="footer">
+  Generated on Tue Mar 28 01:14:58 2017 with ruby-2.4.0
+</div>
+
+  </body>
+</html>
