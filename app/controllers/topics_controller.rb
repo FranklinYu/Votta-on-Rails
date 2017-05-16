@@ -83,8 +83,15 @@ class TopicsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /topics/1
-  # PATCH/PUT /topics/1.json
+  # @url /topics/:id
+  # @action PATCH
+  #
+  # Update a topic.
+  #
+  # @optional [String] topic[title]
+  # @optional [String] topic[body]
+  #
+  # @response [Topic]
   def update
     if @topic.update(topic_params)
       render :show, status: :ok, location: @topic
