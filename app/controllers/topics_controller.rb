@@ -100,8 +100,10 @@ class TopicsController < ApplicationController
     end
   end
 
-  # DELETE /topics/1
-  # DELETE /topics/1.json
+  # @url /topics/:id
+  # @action DELETE
+  #
+  # Delete a topic.
   def destroy
     @topic.destroy
   end
