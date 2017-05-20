@@ -5,6 +5,8 @@ ARG app_path=/usr/src/app/
 RUN mkdir -p $app_path
 WORKDIR $app_path
 
+ENV RAILS_ENV=production
+
 # required only in Alpine Linux
 RUN [ "apk", "add", "--update-cache", "tzdata" ]
 
@@ -21,5 +23,4 @@ RUN apk add --update-cache build-base postgresql-dev && \
 
 COPY . $app_path
 
-ENV RAILS_ENV=production
 CMD [ "bin/entrypoint", "puma" ]
