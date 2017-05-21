@@ -1,11 +1,5 @@
 source 'https://rubygems.org'
 
-begin
-  ruby File.read('.ruby-version').strip
-rescue Errno::ENOENT
-  # Ruby version file is missing.
-end
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
