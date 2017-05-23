@@ -5,6 +5,8 @@
 [![Dependency Status](https://gemnasium.com/badges/github.com/franklinyu/Votta-on-Rails.svg)](https://gemnasium.com/github.com/franklinyu/Votta-on-Rails)
 [![Code Climate](https://codeclimate.com/github/franklinyu/Votta-on-Rails/badges/gpa.svg)](https://codeclimate.com/github/franklinyu/Votta-on-Rails)
 [![Test Coverage](https://codeclimate.com/github/franklinyu/Votta-on-Rails/badges/coverage.svg)](https://codeclimate.com/github/franklinyu/Votta-on-Rails/coverage)
+[![Dependency Status](https://dependencyci.com/github/franklinyu/Votta-on-Rails/badge)](https://dependencyci.com/github/franklinyu/Votta-on-Rails)
+
 [![Join the chat at https://gitter.im/franklinyu/Votta](https://badges.gitter.im/franklinyu/Votta.svg)](https://gitter.im/franklinyu/Votta)
 
 ## deploy on server
