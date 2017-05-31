@@ -13,9 +13,9 @@
 ActiveRecord::Schema.define(version: 20161218072015) do
 
   create_table "candidates", force: :cascade do |t|
-    t.text     "body"
-    t.integer  "topic_id"
-    t.integer  "user_id"
+    t.text "body"
+    t.integer "topic_id"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["topic_id"], name: "index_candidates_on_topic_id"
@@ -23,35 +23,35 @@ ActiveRecord::Schema.define(version: 20161218072015) do
   end
 
   create_table "sessions", force: :cascade do |t|
-    t.integer  "user_id"
-    t.string   "comment",    default: "", null: false
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.integer "user_id"
+    t.string "comment", default: "", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_sessions_on_user_id"
   end
 
   create_table "topics", force: :cascade do |t|
-    t.string   "title"
-    t.text     "body"
-    t.integer  "user_id"
+    t.string "title"
+    t.text "body"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_topics_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",           null: false
-    t.string   "password_digest", null: false
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.string "email", null: false
+    t.string "password_digest", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
   create_table "votes", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "candidate_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.integer "user_id"
+    t.integer "candidate_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["candidate_id"], name: "index_votes_on_candidate_id"
     t.index ["user_id"], name: "index_votes_on_user_id"
   end
