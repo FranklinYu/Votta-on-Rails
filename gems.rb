@@ -39,6 +39,9 @@ group :test do
   gem 'faker', '~> 1.6'
   gem 'fuubar'
   gem 'simplecov', require: false
+end
+
+group :ci, optional: true do
   gem 'codeclimate-test-reporter', '~> 1.0.8'
 end
 
